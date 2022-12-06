@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+
 import reportWebVitals from './reportWebVitals';
 import {createSignalRContext} from "react-signalr";
+import RoomPage from "./Pages/Room";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const SignalRContext = createSignalRContext();
@@ -16,7 +18,7 @@ root.render(
             dependencies={[]}
             transport={1}
         >
-            <App/>
+            <RoomPage/>
         </SignalRContext.Provider>
     </React.StrictMode>
 );
