@@ -13,6 +13,6 @@ export const sendCommand = async (commandDto) => {
 }
 
 export const getMessages = async (roomId) => {
-    const result = await api.get(`Messages/last50?roomId=${roomId}`);
+    const result = await api.get(`messages/last50?roomId=${roomId}`);
     return result.status === 200 ? result.data : [];
 }

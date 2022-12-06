@@ -1,11 +1,12 @@
 import MessageItem from "../MessageItem";
 
-const MessageList = ({messages}) => {
+const MessageList = ({messageList}) => {
 
     return <div style={{
-        flexDirection: "reverse", alignItems: "stretch"
+        flexDirection: "reverse", overflow: "scroll",
     }}>
-        {messages?.map((message) => <MessageItem content={message.content}/>) ?? <></>}
+        {messageList?.length > 0 ? messageList?.map((message) => <MessageItem content={message.content}/>) :
+            <b>No messages</b>}
     < /div>
 }
 export default MessageList;

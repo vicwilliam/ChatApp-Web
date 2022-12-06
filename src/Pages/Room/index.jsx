@@ -1,15 +1,16 @@
 import RoomList from "../../Components/RoomList";
 import React, {useCallback, useEffect, useState} from "react";
 import ChatRoom from "../../Components/ChatRoom";
+import {useSignalREffect} from "../../index";
 
 const RoomPage = () => {
-    const [room,setRoom] = useState();
+    const [room, setRoom] = useState(null);
     const roomClick = useCallback((room) => {
         setRoom(room.id)
     }, [room]);
 
     useEffect(() => {
-        console.log(room)
+
     }, [room]);
 
     return <div style={{
@@ -18,7 +19,8 @@ const RoomPage = () => {
         <RoomList
             rooms={[{roomId: 'asdf', name: 'asdf'}, {roomId: 'asdf', name: 'asdfs'}]}
             onRoomClick={roomClick}/>
-        <ChatRoom roomId={room}/>
+
+        {room ? <ChatRoom roomId={room}/>:<h1>No room selected</h1>}
     </div>;
 };
 export default RoomPage

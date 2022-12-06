@@ -1,37 +1,49 @@
 import React, {useEffect, useState} from "react";
 import MessageList from "./Components/MessageList";
-import {getMessages} from "../../Service/messages";
+import {getMessages, send, sendCommand} from "../../Service/messages";
+import {useSignalREffect} from "../../index";
 
 const ChatRoom = ({roomId}) => {
-    const [message, setMessage] = useState("");
+
+    const [messages, setMessages] = useState([]);
+    const [inputMessage, setInputMessage] = useState("");
 
     const readMessages = async (roomId) => {
         const result = await getMessages(roomId);
-        setMessage(result);
+        setMessages(result);
     };
+    useSignalREffect("newMessage", (params) => {
+        if (roomId === params.roomId)
+            readMessages(roomId);
+    })
 
-    function handleKeyDown(e) {
-        if (e.key === "Enter")
-            console.log(message);
+    async function handleKeyDown(e) {
+        if (e.key === "Enter" && roomId) {
+            if (inputMessage.includes("/"))
+                await sendCommand({content: inputMessage, roomId: roomId});
+            else await send({content: inputMessage, roomId: roomId})
+            setInputMessage("");
+        }
     }
 
     useEffect(() => {
         if (roomId) readMessages(roomId);
     }, [roomId])
 
-    return <>
+    return roomId && <>
         <div style={{
             flexGrow: 10,
-            flexFlow: "column-reverse",
+            flexFlow: "column",
             display: "flex",
             margin: "10px",
-            borderWidth: "10px",
-            border: "solid",
+            height: "100vh",
         }}>
+            <MessageList messageList={messages}/>
             <input style={{margin: "8px"}}
-                   onChange={e => setMessage(e.target.value)}
+                   placeholder={"New message"}
+                   value={inputMessage}
+                   onChange={e => setInputMessage(e.target.value)}
                    onKeyDown={handleKeyDown}/>
-            <MessageList messageList={message}/>
         </div>
     </>
 }
