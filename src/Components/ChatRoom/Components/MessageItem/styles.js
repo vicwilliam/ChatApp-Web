@@ -8,4 +8,7 @@ export const Container = styled.div`
   width: fit-content;
   height: fit-content;
   flex-flow: column;
+  ${({isMessageFromCurrentUser}) => isMessageFromCurrentUser ? `
+    background: cyan;
+    ` : `background: wheat;`}
 `;

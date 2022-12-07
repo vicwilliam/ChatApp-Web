@@ -13,7 +13,8 @@ const ChatRoom = ({roomId}) => {
         setMessages(result);
     };
     useSignalREffect("newMessage", (params) => {
-        if (roomId === params.roomId)
+        const [id] = params;
+        if (roomId === id)
             readMessages(roomId);
     })
 
