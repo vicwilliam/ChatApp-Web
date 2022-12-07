@@ -1,5 +1,4 @@
 import api from "../Util/api";
-import {HttpStatusCode} from "axios";
 
 
 export const getRooms = async () => {

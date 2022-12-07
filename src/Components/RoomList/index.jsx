@@ -2,9 +2,7 @@ import {StyledRoom, StyledListItem} from "./styles";
 import {useClickable} from "@chakra-ui/clickable";
 import React, {useEffect, useState} from "react";
 import {createRoom, getRooms} from "../../Service/room";
-import room from "../../Pages/Room";
 import {useSignalREffect} from "../../index";
-import {send, sendCommand} from "../../Service/messages";
 
 export const Clickable = (props) => {
     const {name} = props;

@@ -20,7 +20,7 @@ const ChatRoom = ({roomId}) => {
     async function handleKeyDown(e) {
         if (e.key === "Enter" && roomId) {
             if (inputMessage.includes("/"))
-                await sendCommand({content: inputMessage, roomId: roomId});
+                await sendCommand({command: inputMessage, roomId: roomId});
             else await send({content: inputMessage, roomId: roomId})
             setInputMessage("");
         }

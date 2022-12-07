@@ -1,7 +1,6 @@
 import RoomList from "../../Components/RoomList";
 import React, {useCallback, useEffect, useState} from "react";
 import ChatRoom from "../../Components/ChatRoom";
-import {useSignalREffect} from "../../index";
 
 const RoomPage = () => {
     const [room, setRoom] = useState(null);

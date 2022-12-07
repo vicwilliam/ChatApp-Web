@@ -1,6 +1,11 @@
 import {Container} from "./styles";
 
-const MessageItem = ({content, authorId}) => {
-    return <Container>{content}</Container>
+const MessageItem = ({message}) => {
+    return <Container>
+        <b>{message.content}</b>
+        <sub>
+            {message.authorUserName}
+        </sub>
+    </Container>
 }
 export default MessageItem;
