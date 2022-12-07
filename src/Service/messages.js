@@ -1,5 +1,4 @@
 import api from "../Util/api";
-import {HttpStatusCode} from "axios";
 
 
 export const send = async (messageDto) => {
@@ -8,6 +7,10 @@ export const send = async (messageDto) => {
 }
 
 export const sendCommand = async (commandDto) => {
+    let command = commandDto.command.replace("/", "");
+    command = command.split("=");
+    commandDto.command = command[0];
+    commandDto.parameter = command[1];
     const result = await api.post('Messages/sendCommand', commandDto);
     return result.status === 200;
 }

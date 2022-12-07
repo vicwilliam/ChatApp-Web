@@ -1,13 +1,20 @@
-import api from "../Util/api";
-import {HttpStatusCode} from "axios";
+import api, {errorsToString} from "../Util/api";
 
 
-export const register = async () => {
-    const result = await api.get('user/register');
-    return result.status === HttpStatusCode.Created ? result.data : null;
+export const register = async (userName, password) => {
+    try {
+        const result = await api.post('user/register', {userName, password});
+        return result.data
+    } catch (e) {
+        throw errorsToString(e.response.data);
+    }
 }
 
-export const authenticate = async (roomName) => {
-    const result = await api.post('authenticate', {name: roomName});
-    return result.status === HttpStatusCode.Ok;
+export const authenticate = async (username, password) => {
+    try {
+        const result = await api.post('user/authenticate', {username, password});
+        return result.data;
+    } catch (e) {
+        console.log(e);
+    }
 }

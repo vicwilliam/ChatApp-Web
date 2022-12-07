@@ -7,4 +7,5 @@ export const Container = styled.div`
   display: flex;
   width: fit-content;
   height: fit-content;
+  flex-flow: column;
 `;
